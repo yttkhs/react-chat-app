@@ -29,7 +29,7 @@ const SignUp: React.FC<Props> = ({history}) => {
         values.email,
         values.password
       )
-      .then(() => history.push('/'))
+      .then(() => history.push('/login'))
       .catch((error) => alert(error))
   }
 
