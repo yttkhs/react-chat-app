@@ -7,7 +7,7 @@ import Login from "./pages/login";
 import SignUp from "./pages/sign-up";
 import Home from "./pages/home";
 
-const App = () => (
+const App: React.FC = () => (
   <Router>
     <Switch>
       <Route exact path="/login" component={Login} />

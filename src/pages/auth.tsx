@@ -1,42 +1,34 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom'
-import firebase from 'firebase'
+import firebase from '../lib/firebase'
 
 type Props = {
   children: any
 }
 
 const Auth: React.FC<Props> = ({children}) => {
-  const [loginCheck, setLoginCheck] = useState(false)
-  const [loggedIn, setLoggedIn] = useState(false)
+  const firebaseUser = firebase.auth().currentUser
+  const [user, setUser] = useState(firebaseUser)
 
   useEffect(() => {
-    checkAuthState()
-  }, [])
 
-  // Check if you are logged in
-  function checkAuthState() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        setLoginCheck(true)
-        setLoggedIn(true)
-      } else {
-        setLoginCheck(true)
-        setLoggedIn(false)
-      }
-    })
-  }
+    // Get currently logged in user
+    const unSub = firebase.auth()
+      .onAuthStateChanged(user => {
+        user
+          ? setUser(user)
+          : setUser(null)
+      })
 
-  // Show while checking login
-  if (!loginCheck) {
-    return <p>Loading...</p>
-  }
+    // Clean up
+    return () => unSub()
+  })
 
-  if (loggedIn) {
-    return children
-  } else {
-    return <Redirect to="/login" />
-  }
+  // Display home screen if user is logged in
+  // Redirect to login screen if user is logged out
+  return user
+    ? children
+    : <Redirect to="/login" />
 };
 
 export default Auth;

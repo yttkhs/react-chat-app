@@ -1,9 +1,18 @@
 import React from 'react';
-import firebase from 'firebase'
+import firebase from '../lib/firebase'
+import {withRouter, RouteComponentProps} from 'react-router-dom'
 
-const Home: React.FC = () => {
+type Props = {
+  history: RouteComponentProps["history"]
+}
+
+const Home: React.FC<Props> = ({history}) => {
+
   const handleLogout = () => {
-    firebase.auth().signOut().then(() => null);
+    firebase.auth()
+      .signOut()
+      .then(() => history.push("/login"))
+      .catch(error => alert(error))
   }
 
   return (
@@ -14,4 +23,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default withRouter(Home);
