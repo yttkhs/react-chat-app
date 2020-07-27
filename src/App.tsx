@@ -2,10 +2,11 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route,} from "react-router-dom";
 
 // Page Components
-import Auth from "./pages/auth";
-import Login from "./pages/login";
-import SignUp from "./pages/sign-up";
-import Home from "./pages/home";
+import Auth from "./pages/Auth";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 const App: React.FC = () => (
   <Router>
@@ -15,6 +16,7 @@ const App: React.FC = () => (
       <Auth>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/profile" component={Profile} />
         </Switch>
       </Auth>
     </Switch>

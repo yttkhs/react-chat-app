@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link, withRouter, RouteComponentProps} from 'react-router-dom'
+import {Link, RouteComponentProps, withRouter} from 'react-router-dom'
+import {useForm} from "react-hook-form";
 import firebase from '../lib/firebase'
-import {useForm} from 'react-hook-form'
 
 type Props = {
   history: RouteComponentProps["history"]
@@ -10,9 +10,9 @@ type Props = {
 type Inputs = {
   email: string
   password: string
-};
+}
 
-const SignUp: React.FC<Props> = ({history}) => {
+const Login: React.FC<Props> = ({history}) => {
 
   // use React Hook Form
   // Library for form validation
@@ -21,19 +21,21 @@ const SignUp: React.FC<Props> = ({history}) => {
   // Settings that require input fields
   const onRequired = register({required: true})
 
-  const handleSignUpFormSubmit = (values: Inputs): void => {
+  // User authentication with email address and password
+  // redirect to home screen if successful
+  const handleLoginFormSubmit = (values: Inputs): void => {
     firebase.auth()
-      .createUserWithEmailAndPassword(
+      .signInWithEmailAndPassword(
         values.email,
         values.password
       )
-      .then(() => history.push('/'))
-      .catch((error) => alert(error))
+      .then(() => history.push("/"))
+      .catch(error => alert(error))
   }
 
   return (
     <div>
-      <form onSubmit={handleSubmit(handleSignUpFormSubmit)}>
+      <form onSubmit={handleSubmit(handleLoginFormSubmit)}>
         <label>
           <input type="email" name="email" ref={onRequired} />
           {errors.email && <p>Please enter your email address</p>}
@@ -42,13 +44,13 @@ const SignUp: React.FC<Props> = ({history}) => {
           <input type="password" name="password" ref={onRequired} />
           {errors.password && <p>Please enter your password</p>}
         </label>
-        <button type="submit">SIGN UP</button>
+        <button type="submit">LOGIN</button>
       </form>
       <div>
-        <Link to="/login">LOGIN</Link>
+        <Link to="/sign-up">SIGN UP</Link>
       </div>
     </div>
   );
 };
 
-export default withRouter(SignUp);
+export default withRouter(Login);

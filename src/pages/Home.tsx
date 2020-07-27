@@ -1,6 +1,6 @@
 import React from 'react';
+import {withRouter, RouteComponentProps, Link} from 'react-router-dom'
 import firebase from '../lib/firebase'
-import {withRouter, RouteComponentProps} from 'react-router-dom'
 
 type Props = {
   history: RouteComponentProps["history"]
@@ -18,6 +18,7 @@ const Home: React.FC<Props> = ({history}) => {
   return (
     <div>
       <p>HOME</p>
+      <Link to="/profile">PROFILE</Link>
       <button onClick={handleLogout}>LOGOUT</button>
     </div>
   );
