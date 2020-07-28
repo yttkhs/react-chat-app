@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link, withRouter, RouteComponentProps} from 'react-router-dom'
-import firebase from '../lib/firebase'
 import {useForm} from 'react-hook-form'
+import {UserData} from '../class/UserData'
+import firebase from '../lib/firebase'
 
 type Props = {
   history: RouteComponentProps["history"]
@@ -29,7 +30,21 @@ const SignUp: React.FC<Props> = ({history}) => {
         values.email,
         values.password
       )
-      .then(() => history.push('/login'))
+      .then((data) => {
+
+        // Create an instance of UserData
+        const userData = new UserData({
+          uid: data.user?.uid,
+          displayName: data.user?.uid,
+          email: values.email
+        })
+
+        // Register user data
+        userData.setUserData();
+
+        // Redirect to login screen
+        history.push('/login');
+      })
       .catch((error) => alert(error))
   }
 
