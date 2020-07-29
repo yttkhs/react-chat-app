@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom'
 import firebase from '../lib/firebase'
+import Loading from "../components/Loading";
 
 type Props = {
   children: any
@@ -31,18 +32,14 @@ const Auth: React.FC<Props> = ({children}) => {
     return () => getUserLoginStatus()
   }, [])
 
-  // Show if mounted
-  if (mount) {
-    return <p>Loading...</p>
-  }
+  // Show if mounting
+  if (mount) return <Loading />
 
   // Display home screen if user is logged in
   // Redirect to login screen if user is logged out
-  if (user) {
-    return children
-  } else {
-    return <Redirect to="/login" />
-  }
+  return user
+    ? children
+    : <Redirect to="/login" />;
 };
 
 export default Auth;
