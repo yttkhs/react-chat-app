@@ -2,6 +2,7 @@ import firebase from '../lib/firebase'
 
 export class UserData {
   uid?: string
+  userId?: string
   displayName?: string
   email?: string
 
@@ -14,6 +15,7 @@ export class UserData {
     firebase.database()
       .ref('users/' + this.uid)
       .set({
+        userId: this.userId,
         displayName: this.displayName,
         email: this.email
       })

@@ -35,7 +35,8 @@ const SignUp: React.FC<Props> = ({history}) => {
         // Create an instance of UserData
         const userData = new UserData({
           uid: data.user?.uid,
-          displayName: data.user?.uid,
+          userId: data.user?.uid,
+          displayName: `user-${data.user?.uid}`,
           email: values.email
         })
 

@@ -6,7 +6,8 @@ import Loading from "../components/Loading";
 
 const Profile: React.FC = () => {
   const [mount, setMount] = useState<Boolean>(true)
-  const [user, setUser] = useState<Pick<UserData, 'displayName' | 'email'>>({
+  const [user, setUser] = useState<Pick<UserData, 'userId' | 'displayName' | 'email'>>({
+    userId: "",
     displayName: "",
     email: ""
   })
@@ -34,6 +35,7 @@ const Profile: React.FC = () => {
   ) : (
     <div>
       <p>PROFILE</p>
+      <p>{user.userId}</p>
       <p>{user.displayName}</p>
       <p>{user.email}</p>
       <Link to="/">HOME</Link>
