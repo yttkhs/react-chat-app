@@ -1,10 +1,22 @@
 import * as functions from 'firebase-functions'
-import client from './aligolia'
+import * as admin from 'firebase-admin';
+import algoliasearch from 'algoliasearch'
 
-exports.onUsersDataWrited = functions.database.ref('users/')
-  .onWrite((change) => {
-    const users = change.after.val();
-    const index = client.initIndex('users');
+admin.initializeApp(functions.config().firebase);
 
-    return index.saveObjects(users);
+const algolia = algoliasearch(
+  functions.config().algolia.app_id,
+  functions.config().algolia.api_key
+)
+
+exports.onUsersDataCreated = functions.firestore.document('users/{userId}')
+  .onCreate((snap, context) => {
+    const users = snap.data();
+    const index = algolia.initIndex('users');
+
+    users.objectID = context.params.userId;
+
+    return users
+      ? index.saveObject(users)
+      : null;
   })
