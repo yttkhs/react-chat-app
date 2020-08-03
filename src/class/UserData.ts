@@ -12,8 +12,9 @@ export class UserData {
 
   // Store user data in database
   setUserData(): void {
-    firebase.database()
-      .ref('users/' + this.uid)
+    firebase.firestore()
+      .collection('users')
+      .doc(this.uid)
       .set({
         userId: this.userId,
         displayName: this.displayName,
@@ -24,12 +25,14 @@ export class UserData {
 
   // Get user data from database
   getUserData(): Promise<any> {
-    return firebase.database()
-      .ref('users/' + this.uid)
-      .once('value')
-      .then(snapshot => snapshot.val())
+    return firebase.firestore()
+      .collection('users')
+      .doc(this.uid)
+      .get()
+      .then((doc) => doc.data())
       .catch(error => alert(error))
   }
 
-  editUserData() {}
+  editUserData() {
+  }
 }
