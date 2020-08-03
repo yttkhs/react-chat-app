@@ -30,14 +30,18 @@ const Profile: React.FC = () => {
     })
   }, [])
 
-  return mount ? (
-    <Loading />
-  ) : (
+  return (
     <div>
       <p>PROFILE</p>
-      <p>{user.userId}</p>
-      <p>{user.displayName}</p>
-      <p>{user.email}</p>
+      {mount
+        ? <Loading />
+        : (
+          <>
+            <p>{user.userId}</p>
+            <p>{user.displayName}</p>
+            <p>{user.email}</p>
+          </>
+        )}
       <Link to="/">HOME</Link>
     </div>
   );
