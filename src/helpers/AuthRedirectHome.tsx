@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom'
 import firebase from '../lib/firebase'
-import Loading from "../components/Loading";
 
 type Props = {
   children: any
 }
 
-const Auth: React.FC<Props> = ({children}) => {
+const AuthRedirectHome: React.FC<Props> = ({children}) => {
   const [user, setUser] = useState<Boolean | null>(null)
 
   useEffect(() => {
@@ -29,13 +28,13 @@ const Auth: React.FC<Props> = ({children}) => {
   }, [])
 
   // Checking if the user is logged in
-  if (user === null) return <Loading />
+  if (user === null) return null
 
   // Display home screen if user is logged in
   // Redirect to login screen if user is logged out
   return user
-    ? children
-    : <Redirect to="/login" />;
+    ? <Redirect to="/home" />
+    : children;
 };
 
-export default Auth;
+export default AuthRedirectHome;
