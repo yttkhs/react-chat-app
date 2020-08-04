@@ -37,7 +37,7 @@ const Profile: React.FC = () => {
           </>
         ) : <Loading />
       }
-      <Link to="/">HOME</Link>
+      <Link to="/home">HOME</Link>
     </div>
   );
 };
