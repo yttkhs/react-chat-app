@@ -8,28 +8,28 @@ type Props = {
 }
 
 const Auth: React.FC<Props> = ({children}) => {
-  const [user, setUser] = useState<Boolean>()
-  const [mount, setMount] = useState<Boolean>(true)
+  const [user, setUser] = useState<Boolean | null>(null)
 
   useEffect(() => {
 
     // Get currently logged in user
-    firebase.auth().onAuthStateChanged((user) => {
+    const getUserLoginStatus = firebase.auth()
+      .onAuthStateChanged(user => {
 
-      // Determine if user is logged in
-      if (user) {
-        setUser(true)
-      } else {
-        setUser(false)
-      }
+        // Determine if user is logged in
+        if (user) {
+          setUser(true)
+        } else {
+          setUser(false)
+        }
+      })
 
-      // Mount is complete !!
-      setMount(false)
-    })
+    // Clean Up
+    return () => getUserLoginStatus()
   }, [])
 
-  // Show if mounting
-  if (mount) return <Loading />
+  // Checking if the user is logged in
+  if (user === null) return <Loading />
 
   // Display home screen if user is logged in
   // Redirect to login screen if user is logged out
