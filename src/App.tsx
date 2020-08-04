@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-// HOC for authentication
+// Composition for Authentication
 import AuthRedirectLogin from "./helpers/AuthRedirectLogin";
 
 // Page Components
