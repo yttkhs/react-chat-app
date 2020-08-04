@@ -14,22 +14,18 @@ const Auth: React.FC<Props> = ({children}) => {
   useEffect(() => {
 
     // Get currently logged in user
-    const getUserLoginStatus = firebase.auth()
-      .onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
 
-        // Determine if user is logged in
-        if (user) {
-          setUser(true)
-        } else {
-          setUser(false)
-        }
+      // Determine if user is logged in
+      if (user) {
+        setUser(true)
+      } else {
+        setUser(false)
+      }
 
-        // Mount is complete !!
-        setMount(false)
-      })
-
-    // Clean up
-    return () => getUserLoginStatus()
+      // Mount is complete !!
+      setMount(false)
+    })
   }, [])
 
   // Show if mounting

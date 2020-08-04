@@ -1,18 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom'
 import firebase from '../lib/firebase'
-import {UserData} from "../class/UserData";
 import Loading from "../components/Loading";
+import {Link} from 'react-router-dom'
+import {UserData} from "../class/UserData";
+
+type UserDataType = Pick<UserData, 'userId' | 'displayName' | 'email'> | null
 
 const Profile: React.FC = () => {
-  const [mount, setMount] = useState<Boolean>(true)
-  const [user, setUser] = useState<Pick<UserData, 'userId' | 'displayName' | 'email'>>({
-    userId: "",
-    displayName: "",
-    email: ""
-  })
+  const [user, setUser] = useState<UserDataType>(null)
 
   useEffect(() => {
+
     // Get currently logged in user
     const currentUser = firebase.auth().currentUser
 
@@ -24,24 +22,21 @@ const Profile: React.FC = () => {
     // Store user data in state
     userData.getUserData().then(data => {
       setUser(data);
-
-      // Mount is complete !!
-      setMount(false)
     })
   }, [])
 
   return (
     <div>
       <p>PROFILE</p>
-      {mount
-        ? <Loading />
-        : (
+      {user
+        ? (
           <>
-            <p>{user.userId}</p>
-            <p>{user.displayName}</p>
-            <p>{user.email}</p>
+            <p>{user?.userId}</p>
+            <p>{user?.displayName}</p>
+            <p>{user?.email}</p>
           </>
-        )}
+        ) : <Loading />
+      }
       <Link to="/">HOME</Link>
     </div>
   );
