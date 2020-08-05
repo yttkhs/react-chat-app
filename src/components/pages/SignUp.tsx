@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link, withRouter, RouteComponentProps} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
-import {UserData} from '../class/UserData'
-import firebase from '../lib/firebase'
+import {UserData} from '../../classes/UserData'
+import firebase from '../../lib/firebase'
 
 type Props = {
   history: RouteComponentProps["history"]

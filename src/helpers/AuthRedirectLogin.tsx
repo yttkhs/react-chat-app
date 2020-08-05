@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom'
 import firebase from '../lib/firebase'
-import Loading from "../components/Loading";
+import Loading from "../components/organisms/Loading";
 
 type Props = {
   children: any

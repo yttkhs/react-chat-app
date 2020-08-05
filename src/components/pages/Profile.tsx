@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import firebase from '../lib/firebase'
-import Loading from "../components/Loading";
+import firebase from '../../lib/firebase'
+import Loading from "../organisms/Loading";
 import {Link} from 'react-router-dom'
-import {UserData} from "../class/UserData";
+import {UserData} from "../../classes/UserData";
 
 type UserDataType = Pick<UserData, 'userId' | 'displayName' | 'email'> | null
 

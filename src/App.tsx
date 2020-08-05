@@ -5,11 +5,11 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import AuthRedirectLogin from "./helpers/AuthRedirectLogin";
 
 // Page Components
-import Index from "./pages/Index";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import Index from "./components/pages/Index";
+import Login from "./components/pages/Login";
+import SignUp from "./components/pages/SignUp";
+import Home from "./components/pages/Home";
+import Profile from "./components/pages/Profile";
 
 const App: React.FC = () => (
   <Router>
