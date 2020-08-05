@@ -3,26 +3,36 @@ import firebase from '../../lib/firebase'
 import Loading from "../organisms/Loading";
 import {Link} from 'react-router-dom'
 import {UserData} from "../../classes/UserData";
+import {UserDataInput} from "../../types"
 
-type UserDataType = Pick<UserData, 'userId' | 'displayName' | 'email'> | null
+type UserDataType = Omit<UserDataInput, 'uid'> | null
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserDataType>(null)
 
   useEffect(() => {
-
-    // Get currently logged in user
+    /* Get currently logged in user */
     const currentUser = firebase.auth().currentUser
 
-    // Create an instance of UserData
-    const userData = new UserData({
-      uid: currentUser?.uid
-    })
+    /* Determine if current user is logged in */
+    if (currentUser) {
+      /* Create an instance of UserData */
+      const userData = new UserData(currentUser.uid)
 
-    // Store user data in state
-    userData.getUserData().then(data => {
-      setUser(data);
-    })
+      /* Store user data in state */
+      userData.getUserData().then(data => {
+        setUser(data);
+      })
+    } else {
+      const errorMessage = "COULD NOT GET";
+
+      /* Set the object that stores the error message */
+      setUser({
+        userId: errorMessage,
+        displayName: errorMessage,
+        email: errorMessage,
+      })
+    }
   }, [])
 
   return (
@@ -31,9 +41,9 @@ const Profile: React.FC = () => {
       {user
         ? (
           <>
-            <p>{user?.userId}</p>
-            <p>{user?.displayName}</p>
-            <p>{user?.email}</p>
+            <p>{user.userId}</p>
+            <p>{user.displayName}</p>
+            <p>{user.email}</p>
           </>
         ) : <Loading />
       }

@@ -14,37 +14,42 @@ type Inputs = {
 };
 
 const SignUp: React.FC<Props> = ({history}) => {
-
-  // use React Hook Form
-  // Library for form validation
+  /* Use React Hook Form: Library for form validations */
   const {register, handleSubmit, errors} = useForm<Inputs>();
 
-  // Settings that require input fields
+  /* Settings that require input fields */
   const onRequired = register({required: true})
 
-  // User registration with email address and password
-  // redirect to login screen if successful
+  /*
+  User registration with email address and password
+  redirect to login screen if successful
+  */
   const handleSignUpFormSubmit = (values: Inputs): void => {
     firebase.auth()
       .createUserWithEmailAndPassword(
         values.email,
         values.password
       )
-      .then((data) => {
+      .then(({user}) => {
+        /* Determine if user data exists */
+        if (user) {
+          /* Create an instance of UserData */
+          const userData = new UserData(
+            user.uid,
+            user.uid,
+            `user-${user.uid}`,
+            values.email
+          )
 
-        // Create an instance of UserData
-        const userData = new UserData({
-          uid: data.user?.uid,
-          userId: data.user?.uid,
-          displayName: `user-${data.user?.uid}`,
-          email: values.email
-        })
+          /* Register user data */
+          userData.setUserData();
 
-        // Register user data
-        userData.setUserData();
-
-        // Redirect to login screen
-        history.push('/login');
+          /* Redirect to login screen */
+          history.push('/login');
+        } else {
+          /* Output an error if there is no user data */
+          throw new Error("Failed to get user data.")
+        }
       })
       .catch((error) => alert(error))
   }

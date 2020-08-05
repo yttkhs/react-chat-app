@@ -1,16 +1,15 @@
 import firebase from '../lib/firebase'
+import {UserDataTypes} from '../types'
 
-export class UserData {
-  uid?: string
-  userId?: string
-  displayName?: string
-  email?: string
+export class UserData implements UserDataTypes {
+  constructor(
+    readonly uid: string,
+    readonly userId: string = "",
+    readonly displayName: string = "",
+    readonly email: string = ""
+  ) {}
 
-  constructor(init?: Partial<UserData>) {
-    Object.assign(this, init)
-  }
-
-  // Store user data in database
+  /* Store user data in database */
   setUserData(): void {
     firebase.firestore()
       .collection('users')
@@ -23,7 +22,7 @@ export class UserData {
       .catch(error => alert(error))
   }
 
-  // Get user data from database
+  /* Get user data from database */
   getUserData(): Promise<any> {
     return firebase.firestore()
       .collection('users')
@@ -31,8 +30,5 @@ export class UserData {
       .get()
       .then((doc) => doc.data())
       .catch(error => alert(error))
-  }
-
-  editUserData() {
   }
 }
