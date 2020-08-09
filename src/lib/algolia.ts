@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch'
+import algoliasearch, {SearchClient} from 'algoliasearch'
 
 const appId = `${process.env.REACT_APP_ALGOLIA_APP_ID}`
 const apiKey = `${process.env.REACT_APP_ALGOLIA_SEARCH_ONLY}`
@@ -6,12 +6,12 @@ const apiKey = `${process.env.REACT_APP_ALGOLIA_SEARCH_ONLY}`
 export const algoliaClient = algoliasearch(appId, apiKey);
 
 export const searchClient = {
-  // @ts-ignore
-  search(requests) {
-    // @ts-ignore
-    if (requests.every(({params}) => !params.query)) {
+  search(queries) {
+    if (queries.every(({params}) => {
+      return params ? !params.query : null;
+    })) {
       return Promise.resolve({
-        results: requests.map(() => ({
+        results: queries.map(() => ({
           hits: [],
           nbHits: 0,
           nbPages: 0,
@@ -20,6 +20,6 @@ export const searchClient = {
       });
     }
 
-    return algoliaClient.search(requests);
+    return algoliaClient.search(queries);
   }
-};
+} as SearchClient
