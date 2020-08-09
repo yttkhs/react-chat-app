@@ -3,12 +3,15 @@ import firebase from '../../lib/firebase'
 import Loading from "../organisms/Loading";
 import {Link} from 'react-router-dom'
 import {UserData} from "../../classes/UserData";
-import {UserDataInput} from "../../types"
 
-type UserDataType = Omit<UserDataInput, 'uid'> | null
+type UserDataInput = {
+  userId: string
+  displayName: string
+  email: string
+} | null
 
 const Profile: React.FC = () => {
-  const [user, setUser] = useState<UserDataType>(null)
+  const [user, setUser] = useState<UserDataInput>(null)
 
   useEffect(() => {
     /* Get currently logged in user */

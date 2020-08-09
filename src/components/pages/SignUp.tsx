@@ -34,15 +34,10 @@ const SignUp: React.FC<Props> = ({history}) => {
         /* Determine if user data exists */
         if (user) {
           /* Create an instance of UserData */
-          const userData = new UserData(
-            user.uid,
-            user.uid,
-            `user-${user.uid}`,
-            values.email
-          )
+          const userData = new UserData(user.uid)
 
           /* Register user data */
-          userData.setUserData();
+          userData.setUserData(`user-${user.uid}`, values.email);
 
           /* Redirect to login screen */
           history.push('/login');
