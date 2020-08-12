@@ -1,55 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import firebase from '../../lib/firebase'
-import Loading from "../organisms/Loading";
+import React from 'react';
 import {Link} from 'react-router-dom'
-import {UserData} from "../../classes/UserData";
-
-type UserDataInput = {
-  userId: string
-  displayName: string
-  email: string
-} | null
+import {useSelector} from "react-redux";
+import {RootState} from '../../store';
+import {State as UserDataState} from '../../store/storeUserData'
 
 const Profile: React.FC = () => {
-  const [user, setUser] = useState<UserDataInput>(null)
-
-  useEffect(() => {
-    /* Get currently logged in user */
-    const currentUser = firebase.auth().currentUser
-
-    /* Determine if current user is logged in */
-    if (currentUser) {
-      /* Create an instance of UserData */
-      const userData = new UserData(currentUser.uid)
-
-      /* Store user data in state */
-      userData.getUserData().then(data => {
-        setUser(data);
-      })
-    } else {
-      const errorMessage = "COULD NOT GET";
-
-      /* Set the object that stores the error message */
-      setUser({
-        userId: errorMessage,
-        displayName: errorMessage,
-        email: errorMessage,
-      })
-    }
-  }, [])
+  const userData = useSelector<RootState, UserDataState>(({userData}) => userData)
 
   return (
     <div>
       <p>PROFILE</p>
-      {user
-        ? (
-          <>
-            <p>{user.userId}</p>
-            <p>{user.displayName}</p>
-            <p>{user.email}</p>
-          </>
-        ) : <Loading />
-      }
+      <p>{userData.userId}</p>
+      <p>{userData.displayName}</p>
+      <p>{userData.email}</p>
       <Link to="/home">HOME</Link>
     </div>
   );

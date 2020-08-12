@@ -6,13 +6,15 @@ type Type = "ADD::FRIEND_DATA" | "RESET::FRIEND_DATA" | "DELETE::FRIEND_DATA"
 
 type Action = {
   type: Type
-  payload? : State
+  payload?: State
 }
 
+// State
 const initState: State = {
   friend: {}
 }
 
+// Action
 export const friendDataAction = {
   add: (payload: State): Action => ({
     type: "ADD::FRIEND_DATA",
@@ -26,17 +28,18 @@ export const friendDataAction = {
   })
 }
 
+// Reducer
 export const friendDataReducer = (
   state = initState,
-  action: {
-    type: Type,
-    payload: State
-  }
+  action: { type: Type, payload: State }
 ): State => {
   switch (action.type) {
     case "ADD::FRIEND_DATA":
       return {
-        ...action.payload
+        friend: {
+          ...state.friend,
+          ...action.payload.friend
+        }
       }
     case "RESET::FRIEND_DATA":
       return {

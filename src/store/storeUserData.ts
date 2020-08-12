@@ -11,30 +11,28 @@ type Action = {
   payload? : State
 }
 
+// State
 const initState: State = {
   userId: '',
   displayName: '',
   email: ''
 }
 
+// Action
 export const userDataAction = {
   add: (payload: State): Action => ({
     type: 'ADD::USER_DATA',
     payload: payload
   }),
-  reset: (): Action => {
-    return {
-      type: 'RESET::USER_DATA',
-    }
-  }
+  reset: (): Action => ({
+    type: 'RESET::USER_DATA',
+  })
 }
 
+// Reducer
 export const userDataReducer = (
   state = initState,
-  action: {
-    type: Type,
-    payload: State
-  }
+  action: { type: Type, payload: State }
 ): State => {
   switch (action.type) {
     case 'ADD::USER_DATA':

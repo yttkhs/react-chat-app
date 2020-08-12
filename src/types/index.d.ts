@@ -9,10 +9,12 @@ export interface UserDataMethod {
 
   getUserData(): Promise<any>
 
-  setFriendsData(data: FriendsData[]): void
+  setFriendsData(data: FriendsData): void
 }
 
 export interface FriendsData {
-  uid: string
-  userId: string
+  [key: string]: {
+    userId: string
+    displayName: string
+  }
 }
