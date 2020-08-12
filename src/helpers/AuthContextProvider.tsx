@@ -2,22 +2,38 @@ import React, {useEffect, useState} from 'react';
 import firebase from "../lib/firebase";
 
 type Props = { children: any }
-type User = firebase.User | null | undefined;
+
+type AuthState = firebase.User | null | undefined
+
+type Context = {
+  userState: AuthState
+  logout: () => void
+}
+
+const defaultContext: Context = {
+  userState: undefined,
+  logout: () => {}
+}
 
 // Create user authentication context
-export const AuthContext = React.createContext<User>(undefined)
+export const AuthContext = React.createContext<Context>(defaultContext)
 
 const AuthContextProvider: React.FC<Props> = ({children}) => {
-  const [user, setUser] = useState<User>(undefined)
+  const [userState, setAuthState] = useState<AuthState>(undefined)
+
+  // Change React authentication status to null
+  const logout = (): void => {
+    setAuthState(null)
+  }
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      setUser(user)
+      setAuthState(user)
     })
   }, [])
 
   return (
-    <AuthContext.Provider value={user}>
+    <AuthContext.Provider value={{userState, logout}}>
       {children}
     </AuthContext.Provider>
   );

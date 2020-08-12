@@ -7,14 +7,14 @@ type Props = {
 }
 
 const AuthRedirectHome: React.FC<Props> = ({children}) => {
-  const user = useContext(AuthContext)
+  const {userState} = useContext(AuthContext)
 
   // Checking if the user is logged in
-  if (user === undefined) return null
+  if (userState === undefined) return null
 
   // Display home screen if user is logged in
   // Redirect to login screen if user is logged out
-  return user
+  return userState
     ? <Redirect to="/home" />
     : children;
 };

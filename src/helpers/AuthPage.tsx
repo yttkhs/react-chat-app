@@ -12,14 +12,14 @@ type Props = {
 }
 
 const AuthPage: React.FC<Props> = ({children}) => {
-  const currentUser = useContext(AuthContext)
+  const {userState} = useContext(AuthContext)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (currentUser) {
+    if (userState) {
 
       // Get user data
-      new UserData(currentUser.uid).getUserData()
+      new UserData(userState.uid).getUserData()
         .then(data => {
 
           // Store user basic data in Store
@@ -40,14 +40,14 @@ const AuthPage: React.FC<Props> = ({children}) => {
       dispatch(userDataAction.reset())
       dispatch(friendDataAction.reset())
     })
-  }, [currentUser, dispatch])
+  }, [userState, dispatch])
 
   // Checking if the user is logged in
-  if (currentUser === undefined) return <Loading />
+  if (userState === undefined) return <Loading />
 
   // Display home screen if user is logged in
   // Redirect to login screen if user is logged out
-  return currentUser
+  return userState
     ? children
     : <Redirect to="/login" />;
 };

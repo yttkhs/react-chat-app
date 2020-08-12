@@ -1,17 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import firebase from "../../lib/firebase";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {AuthContext} from "../../helpers/AuthContextProvider";
 
 type Props = {
   history: RouteComponentProps["history"]
 }
 
 const ButtonLogout: React.FC<Props> = ({history}) => {
+  const {logout} = useContext(AuthContext)
 
   const handleLogout = () => {
     firebase.auth()
       .signOut()
-      .then(() => history.push("/login"))
+      .then(() => {
+        logout()
+        history.push("/login");
+      })
       .catch(error => alert(error))
   }
 
