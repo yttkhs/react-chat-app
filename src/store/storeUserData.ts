@@ -1,4 +1,4 @@
-type State = {
+export interface State {
   userId: string,
   displayName: string,
   email: string

@@ -1,5 +1,5 @@
-type State = {
-  friend: string[]
+export interface State {
+  friend: {}
 }
 
 type Type = "ADD::FRIEND_DATA" | "RESET::FRIEND_DATA" | "DELETE::FRIEND_DATA"
@@ -10,7 +10,7 @@ type Action = {
 }
 
 const initState: State = {
-  friend: []
+  friend: {}
 }
 
 export const friendDataAction = {
@@ -21,7 +21,7 @@ export const friendDataAction = {
   reset: (): Action => ({
     type: "RESET::FRIEND_DATA",
   }),
-  delete: (): Action => ({
+  del: (): Action => ({
     type: "DELETE::FRIEND_DATA",
   })
 }
