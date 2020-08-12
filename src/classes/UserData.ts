@@ -15,7 +15,7 @@ export class UserData implements UserDataTypes {
         userId: this.uid,
         displayName: name,
         email: email,
-        friends: []
+        friend: {}
       })
       .catch(error => alert(error))
   }
@@ -31,12 +31,12 @@ export class UserData implements UserDataTypes {
   }
 
   // Set data of friends
-  setFriendsData(data: FriendsData[]) {
+  setFriendsData(data: FriendsData) {
     firebase.firestore()
       .collection('users')
       .doc(this.uid)
       .set(
-        {friends: data},
+        {friend: data},
         {merge: true}
       )
       .catch(error => alert(error))

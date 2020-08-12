@@ -1,37 +1,44 @@
+import React from "react";
 import {Hit} from "react-instantsearch-core";
-import React, {useState, useEffect} from "react";
 import {connectHits} from "react-instantsearch-dom";
-import firebase from "../../lib/firebase";
+import ButtonFriendRegister from "../atoms/ButtonFriendRegister";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
+import {State as FriendDataState} from '../../store/storeFriendData'
+import {State as UserDataState} from "../../store/storeUserData";
 
 type Props = {
   hits: Hit[];
 }
 
 const CustomHits: React.FC<Props> = ({hits}) => {
-  const [user, setUser] = useState<string | null>(null)
+  const userData = useSelector<RootState, UserDataState>(({userData}) => userData)
+  const friendData = useSelector<RootState, FriendDataState>(({friendData}) => friendData)
 
-  useEffect(() => {
-    // Get currently logged in user
-    const currentUser = firebase.auth().currentUser
+  // Narrow down to users other than yourself
+  const userList = hits.filter(h => h.objectID !== userData.userId)
 
-    // Set uid to "setUser"
-    if (currentUser) setUser(currentUser.uid)
-  }, [])
+  // If a friend exists: return an array of ids
+  // If no friends exist: return an empty array
+  const friendIdList = Object.keys(friendData.friend).length
+    ? Object.entries(friendData.friend).map(v => v[0])
+    : []
 
-  return user ? (
+  return (
     <ul>
-      {hits
-        .filter(h => h.objectID !== user) // Exclude my user data
-        .map((h) => (
-          <li key={h.objectID}>
-            <div>{h.displayName}</div>
-            <div>{h.userId}</div>
-          </li>
-        ))}
+      {userList.map((h) => (
+        <li key={h.objectID}>
+          <div>{h.displayName}</div>
+          <div>{h.userId}</div>
+          {
+            friendIdList.includes(h.userId)
+              ? <p>友達登録済み</p>
+              : <ButtonFriendRegister hits={h} />
+          }
+        </li>
+      ))}
     </ul>
-  ) : null;
-
-
+  )
 }
 
 export default connectHits(CustomHits)
