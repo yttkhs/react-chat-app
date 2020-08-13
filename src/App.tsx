@@ -23,8 +23,10 @@ const App: React.FC = () => (
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={SignUp} />
           <AuthPage>
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/profile" component={Profile} />
+            <Switch>
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/:userId" component={Profile} />
+            </Switch>
           </AuthPage>
         </Switch>
       </BrowserRouter>
