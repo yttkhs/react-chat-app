@@ -1,7 +1,6 @@
 {
   "functions": {
-    "predeploy": "yarn --cwd \"$RESOURCE_DIR\" run build",
-    "source": "functions"
+    "predeploy": "yarn --cwd \"$RESOURCE_DIR\" run build"
   },
   "firestore": {
     "rules": "firestore.rules",

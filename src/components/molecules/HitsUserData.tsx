@@ -18,12 +18,6 @@ const CustomHits: React.FC<Props> = ({hits}) => {
   // Narrow down to users other than yourself
   const userList = hits.filter(h => h.objectID !== userData.userId)
 
-  // If a friend exists: return an array of ids
-  // If no friends exist: return an empty array
-  const friendIdList = Object.keys(friendData).length
-    ? Object.entries(friendData).map(v => v[0])
-    : []
-
   return (
     <ul>
       {userList.map((h) => (
@@ -31,7 +25,7 @@ const CustomHits: React.FC<Props> = ({hits}) => {
           <div>{h.displayName}</div>
           <div>{h.userId}</div>
           {
-            friendIdList.includes(h.userId)
+            friendData.includes(h.userId)
               ? <p>友達登録済み</p>
               : <ButtonFriendRegister hits={h} />
           }

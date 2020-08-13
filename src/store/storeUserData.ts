@@ -2,6 +2,7 @@ export interface State {
   userId: string,
   displayName: string,
   email: string
+  biography: string
 }
 
 type Type = "ADD::USER_DATA" | "RESET::USER_DATA"
@@ -15,7 +16,8 @@ type Action = {
 const initState: State = {
   userId: '',
   displayName: '',
-  email: ''
+  email: '',
+  biography: ''
 }
 
 // Action
@@ -37,6 +39,7 @@ export const userDataReducer = (
   switch (action.type) {
     case 'ADD::USER_DATA':
       return {
+        ...state,
         ...action.payload
       }
     case 'RESET::USER_DATA':
