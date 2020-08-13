@@ -1,5 +1,15 @@
 export interface State {
-  friend: {}
+  [key: string]: {
+    userId: string
+    displayName: string
+    chatLog: [] | [
+      {
+        id: number
+        date: Date
+        text: string
+      }
+    ]
+  }
 }
 
 type Type = "ADD::FRIEND_DATA" | "RESET::FRIEND_DATA" | "DELETE::FRIEND_DATA"
@@ -10,9 +20,7 @@ type Action = {
 }
 
 // State
-const initState: State = {
-  friend: {}
-}
+const initState: State = {}
 
 // Action
 export const friendDataAction = {
@@ -36,10 +44,8 @@ export const friendDataReducer = (
   switch (action.type) {
     case "ADD::FRIEND_DATA":
       return {
-        friend: {
-          ...state.friend,
-          ...action.payload.friend
-        }
+        ...state,
+        ...action.payload
       }
     case "RESET::FRIEND_DATA":
       return {

@@ -20,19 +20,13 @@ const AuthPage: React.FC<Props> = ({children}) => {
 
       // Get user data
       new UserData(userState.uid).getUserData()
-        .then(data => {
+        .then(({displayName, email, userId, friend}) => {
 
           // Store user basic data in Store
-          dispatch(userDataAction.add({
-            displayName: data.displayName,
-            email: data.email,
-            userId: data.userId
-          }))
+          dispatch(userDataAction.add({displayName, email, userId}))
 
           // Store user friend data in store
-          dispatch(friendDataAction.add({
-            friend: data.friend
-          }))
+          dispatch(friendDataAction.add(friend))
         })
     }
 

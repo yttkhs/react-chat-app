@@ -20,8 +20,8 @@ const CustomHits: React.FC<Props> = ({hits}) => {
 
   // If a friend exists: return an array of ids
   // If no friends exist: return an empty array
-  const friendIdList = Object.keys(friendData.friend).length
-    ? Object.entries(friendData.friend).map(v => v[0])
+  const friendIdList = Object.keys(friendData).length
+    ? Object.entries(friendData).map(v => v[0])
     : []
 
   return (

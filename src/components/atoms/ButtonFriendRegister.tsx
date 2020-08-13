@@ -5,6 +5,7 @@ import {friendDataAction} from "../../store/storeFriendData";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {State as UserDataState} from "../../store/storeUserData";
+import {State as FriendDataState} from "../../store/storeFriendData";
 
 type Props = {
   hits: Hit
@@ -17,20 +18,19 @@ const ButtonFriendRegister: React.FC<Props> = ({hits}) => {
   const handleClick = () => {
 
     // Data object to set
-    const data = {
+    const friendData: FriendDataState = {
       [hits.userId]: {
         userId: hits.userId,
-        displayName: hits.displayName
+        displayName: hits.displayName,
+        chatLog: []
       }
     }
 
     // Store data in Firestore
-    new UserData(userData.userId).setFriendsData(data)
+    new UserData(userData.userId).setFriendsData(friendData)
 
     // Store data in Redux
-    dispatch(friendDataAction.add({
-      friend: data
-    }))
+    dispatch(friendDataAction.add(friendData))
   }
 
   return (
