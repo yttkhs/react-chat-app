@@ -16,8 +16,9 @@ const ButtonFriendRegister: React.FC<Props> = ({hits}) => {
 
   const handleClick = () => {
 
-    // Store data in Firestore
+    // Store each ID in your own friend list and the other party's friend list
     new UserData(userData.userId).addFriendsData([hits.userId])
+    new UserData(hits.userId).addFriendsData([userData.userId])
 
     // Store data in Redux
     dispatch(friendDataAction.add([hits.userId]))
