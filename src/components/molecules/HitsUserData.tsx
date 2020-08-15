@@ -16,12 +16,12 @@ const CustomHits: React.FC<Props> = ({hits}) => {
   const friendData = useSelector<RootState, FriendDataState>(({friendData}) => friendData)
 
   // Narrow down to users other than yourself
-  const userList = hits.filter(h => h.objectID !== userData.userId)
+  const userList = hits.filter(h => h.userId !== userData.userId)
 
   return (
     <ul>
       {userList.map((h) => (
-        <li key={h.objectID}>
+        <li key={h.userId}>
           <div>{h.displayName}</div>
           <div>{h.userId}</div>
           {
