@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import firebase from "../../lib/firebase";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {AuthContext} from "../../helpers/AuthContextProvider";
+import {AuthContext} from "../templates/AuthContextProvider";
 
 type Props = {
   history: RouteComponentProps["history"]

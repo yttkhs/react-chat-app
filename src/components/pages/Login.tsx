@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, RouteComponentProps, withRouter} from 'react-router-dom'
 import {useForm} from "react-hook-form";
 import firebase from '../../lib/firebase'
-import AuthRedirectHome from "../../helpers/AuthRedirectHome";
+import AuthRedirectHome from "../templates/AuthRedirectHome";
 
 type Props = {
   history: RouteComponentProps["history"]

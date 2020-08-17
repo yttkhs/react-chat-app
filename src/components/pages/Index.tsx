@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthRedirectHome from "../../helpers/AuthRedirectHome";
+import AuthRedirectHome from "../templates/AuthRedirectHome";
 
 const Index: React.FC = () => (
   <AuthRedirectHome>

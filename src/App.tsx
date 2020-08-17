@@ -4,8 +4,8 @@ import {store} from './store'
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 // Authentication Components
-import AuthContextProvider from "./helpers/AuthContextProvider";
-import AuthPage from "./helpers/AuthPage";
+import AuthContextProvider from "./components/templates/AuthContextProvider";
+import AuthPage from "./components/templates/AuthPage";
 
 // Page Components
 import Index from "./components/pages/Index";
