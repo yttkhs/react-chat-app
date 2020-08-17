@@ -4,19 +4,20 @@ import {connectHits} from "react-instantsearch-dom";
 import ButtonFriendRegister from "../atoms/ButtonFriendRegister";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {State as FriendDataState} from '../../store/storeFriendData'
-import {State as UserDataState} from "../../store/storeUserData";
+import { UserDataProperties } from "../../types";
 
 type Props = {
   hits: Hit[];
 }
 
 const CustomHits: React.FC<Props> = ({hits}) => {
-  const userData = useSelector<RootState, UserDataState>(({userData}) => userData)
-  const friendData = useSelector<RootState, FriendDataState>(({friendData}) => friendData)
+  const userData = useSelector<RootState, UserDataProperties>(({userData}) => userData)
 
   // Narrow down to users other than yourself
   const userList = hits.filter(h => h.userId !== userData.userId)
+
+  // Create a friend ID list
+  const friendList = Object.entries(userData.friend).map(v => v[0])
 
   return (
     <ul>
@@ -25,7 +26,7 @@ const CustomHits: React.FC<Props> = ({hits}) => {
           <div>{h.displayName}</div>
           <div>{h.userId}</div>
           {
-            friendData.includes(h.userId)
+            friendList.includes(h.userId)
               ? <p>友達登録済み</p>
               : <ButtonFriendRegister hits={h} />
           }

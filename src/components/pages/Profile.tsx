@@ -2,10 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import {useSelector} from "react-redux";
 import {RootState} from '../../store';
-import {State as UserDataState} from '../../store/storeUserData'
+import { UserDataProperties } from '../../types';
 
 const Profile: React.FC = () => {
-  const userData = useSelector<RootState, UserDataState>(({userData}) => userData)
+  const userData = useSelector<RootState, UserDataProperties>(({userData}) => userData)
 
   return (
     <div>

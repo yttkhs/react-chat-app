@@ -1,28 +1,24 @@
-export interface State {
-  userId: string,
-  displayName: string,
-  email: string
-  biography: string
-}
+import { UserDataProperties } from "../types"
 
 type Type = "ADD::USER_DATA" | "RESET::USER_DATA"
 
 type Action = {
   type: Type
-  payload? : State
+  payload? : Partial<UserDataProperties>
 }
 
 // State
-const initState: State = {
+const initState: UserDataProperties = {
   userId: '',
   displayName: '',
   email: '',
-  biography: ''
+  biography: '',
+  friend: {}
 }
 
 // Action
 export const userDataAction = {
-  add: (payload: State): Action => ({
+  add: (payload: Partial<UserDataProperties>): Action => ({
     type: 'ADD::USER_DATA',
     payload: payload
   }),
@@ -34,8 +30,8 @@ export const userDataAction = {
 // Reducer
 export const userDataReducer = (
   state = initState,
-  action: { type: Type, payload: State }
-): State => {
+  action: Action
+): UserDataProperties => {
   switch (action.type) {
     case 'ADD::USER_DATA':
       return {

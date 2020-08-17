@@ -1,15 +1,13 @@
 import {createStore, combineReducers, compose} from "redux";
-import {userDataReducer as userData, State as UserDataState} from './storeUserData'
-import {friendDataReducer as friendData, State as FriendDataState} from "./storeFriendData";
+import {userDataReducer as userData} from './storeUserData'
+import { UserDataProperties } from "../types";
 
 export interface RootState {
-  userData: UserDataState
-  friendData: FriendDataState
+  userData: UserDataProperties
 }
 
 const reducers = combineReducers({
-  userData,
-  friendData
+  userData
 })
 
 export const store = createStore(

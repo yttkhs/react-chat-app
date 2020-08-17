@@ -1,9 +1,8 @@
 import firebase from '../lib/firebase'
-import {UserDataTypes} from '../types'
+import {_UserData, UserDataProperties} from '../types'
 
-export class UserData implements UserDataTypes {
-  constructor(readonly uid: string) {
-  }
+export class UserData implements _UserData {
+  constructor(readonly uid: string) {}
 
   // Store user data in database
   setUserData(name: string, email: string): void {
@@ -15,7 +14,7 @@ export class UserData implements UserDataTypes {
         displayName: name,
         email: email,
         biography: "",
-        friend: []
+        friend: {}
       })
       .catch(error => alert(error))
   }
@@ -31,26 +30,13 @@ export class UserData implements UserDataTypes {
   }
 
   // Update user data
-  updateUserData(displayName: string, biography: string): void {
+  updateUserData(payload: Partial<UserDataProperties>): void {
     firebase.firestore()
       .collection('users')
       .doc(this.uid)
       .update({
-        displayName: displayName,
-        biography: biography
+        ...payload
       })
-      .catch(error => alert(error))
-  }
-
-  // Add friend data
-  addFriendsData(friend: string[]): void {
-    firebase.firestore()
-      .collection('users')
-      .doc(this.uid)
-      .set(
-        {friend: friend},
-        {merge: true}
-      )
       .catch(error => alert(error))
   }
 }
