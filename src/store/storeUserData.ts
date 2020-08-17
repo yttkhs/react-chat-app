@@ -1,10 +1,10 @@
-import { UserDataProperties } from "../types"
+import {UserDataProperties} from "../types"
 
 type Type = "ADD::USER_DATA" | "RESET::USER_DATA"
 
 type Action = {
   type: Type
-  payload? : Partial<UserDataProperties>
+  payload?: Partial<UserDataProperties>
 }
 
 // State
@@ -28,10 +28,7 @@ export const userDataAction = {
 }
 
 // Reducer
-export const userDataReducer = (
-  state = initState,
-  action: Action
-): UserDataProperties => {
+export const userDataReducer = (state = initState, action: Action) => {
   switch (action.type) {
     case 'ADD::USER_DATA':
       return {
