@@ -3,8 +3,7 @@ import {Link} from 'react-router-dom'
 import ButtonLogout from "../atoms/ButtonLogout";
 import SearchUserData from "../organisms/SearchUserData";
 import {useSelector} from "react-redux";
-import {RootState} from "../../store";
-import { UserDataProperties } from '../../types';
+import { RootState, UserDataProperties } from '../../types';
 
 type Props = {}
 

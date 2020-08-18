@@ -1,10 +1,5 @@
 import {createStore, combineReducers, compose} from "redux";
-import {userDataReducer as userData} from './storeUserData'
-import { UserDataProperties } from "../types";
-
-export interface RootState {
-  userData: UserDataProperties
-}
+import {userDataReducer as userData} from './reducers/userDataReducer'
 
 const reducers = combineReducers({
   userData

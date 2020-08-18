@@ -3,8 +3,7 @@ import {Hit} from "react-instantsearch-core";
 import {connectHits} from "react-instantsearch-dom";
 import ButtonFriendRegister from "../atoms/ButtonFriendRegister";
 import {useSelector} from "react-redux";
-import {RootState} from "../../store";
-import { UserDataProperties } from "../../types";
+import { RootState, UserDataProperties } from "../../types";
 
 type Props = {
   hits: Hit[];

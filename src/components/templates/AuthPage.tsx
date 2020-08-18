@@ -3,7 +3,7 @@ import firebase from "../../lib/firebase";
 import {useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom'
 import {AuthContext} from './AuthContextProvider';
-import {userDataAction} from '../../store/storeUserData';
+import {userDataAction} from '../../store/actions/userDataAction';
 import Loading from "../organisms/Loading";
 
 type Props = {

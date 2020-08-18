@@ -1,12 +1,11 @@
 import React from 'react';
 import firebase from '../../lib/firebase'
-import {UserData} from "../../classes/UserData";
-import {Hit} from "react-instantsearch-core";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
-import {userDataAction} from "../../store/storeUserData";
+import {RootState, UserDataProperties} from '../../types';
+import {userDataAction} from "../../store/actions/userDataAction";
+import {UserData} from "../../classes/UserData";
 import {ChatData} from "../../classes/ChatData";
-import {UserDataProperties} from '../../types';
+import {Hit} from "react-instantsearch-core";
 
 type Props = {
   hits: Hit
