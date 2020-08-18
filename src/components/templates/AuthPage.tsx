@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import firebase from "../../lib/firebase";
 import {useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import {AuthContext} from './AuthContextProvider';
+import {AuthContext} from '../../providers/Auth';
 import {userDataAction} from '../../store/actions/userDataAction';
 import Loading from "../organisms/Loading";
 

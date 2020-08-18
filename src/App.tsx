@@ -4,7 +4,7 @@ import {store} from './store'
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 // Authentication Components
-import AuthContextProvider from "./components/templates/AuthContextProvider";
+import Auth from "./providers/Auth";
 import AuthPage from "./components/templates/AuthPage";
 
 // Page Components
@@ -16,7 +16,7 @@ import Profile from "./components/pages/Profile";
 
 const App: React.FC = () => (
   <Provider store={store}>
-    <AuthContextProvider>
+    <Auth>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Index} />
@@ -30,7 +30,7 @@ const App: React.FC = () => (
           </AuthPage>
         </Switch>
       </BrowserRouter>
-    </AuthContextProvider>
+    </Auth>
   </Provider>
 );
 

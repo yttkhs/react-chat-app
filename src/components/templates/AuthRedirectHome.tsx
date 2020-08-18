@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Redirect} from 'react-router-dom'
-import { AuthContext } from './AuthContextProvider';
+import { AuthContext } from '../../providers/Auth';
 
 type Props = {
   children: any

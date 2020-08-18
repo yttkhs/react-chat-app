@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import firebase from "../../lib/firebase";
+import firebase from "../lib/firebase";
 
 type Props = { children: any }
 
@@ -18,7 +18,7 @@ const defaultContext: Context = {
 // Create user authentication context
 export const AuthContext = React.createContext<Context>(defaultContext)
 
-const AuthContextProvider: React.FC<Props> = ({children}) => {
+const Auth: React.FC<Props> = ({children}) => {
   const [userState, setAuthState] = useState<AuthState>(undefined)
 
   // Change React authentication status to null
@@ -39,4 +39,4 @@ const AuthContextProvider: React.FC<Props> = ({children}) => {
   );
 };
 
-export default AuthContextProvider;
+export default Auth;
