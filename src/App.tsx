@@ -13,6 +13,7 @@ import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import Home from "./components/pages/Home";
 import Profile from "./components/pages/Profile";
+import ProfileEdit from './components/pages/ProfileEdit';
 
 const App: React.FC = () => (
   <Provider store={store}>
@@ -25,7 +26,8 @@ const App: React.FC = () => (
           <AuthPage>
             <Switch>
               <Route exact path="/home" component={Home} />
-              <Route exact path="/:userId" component={Profile} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/profile/edit" component={ProfileEdit} />
             </Switch>
           </AuthPage>
         </Switch>

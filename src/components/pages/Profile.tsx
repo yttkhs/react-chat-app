@@ -12,6 +12,7 @@ const Profile: React.FC = () => {
       <p>{userData.userId}</p>
       <p>{userData.displayName}</p>
       <p>{userData.email}</p>
+      <Link to="/profile/edit">Edit Profile</Link>
       <Link to="/home">HOME</Link>
     </div>
   );
