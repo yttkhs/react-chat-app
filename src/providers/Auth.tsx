@@ -7,12 +7,12 @@ type AuthState = firebase.User | null | undefined
 
 type Context = {
   userState: AuthState
-  logout: () => void
+  logoutFirebaseAuth: () => void
 }
 
 const defaultContext: Context = {
   userState: undefined,
-  logout: () => {}
+  logoutFirebaseAuth: () => {}
 }
 
 // Create user authentication context
@@ -22,7 +22,7 @@ const Auth: React.FC<Props> = ({children}) => {
   const [userState, setAuthState] = useState<AuthState>(undefined)
 
   // Change React authentication status to null
-  const logout = (): void => {
+  const logoutFirebaseAuth = (): void => {
     setAuthState(null)
   }
 
@@ -33,7 +33,7 @@ const Auth: React.FC<Props> = ({children}) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{userState, logout}}>
+    <AuthContext.Provider value={{userState, logoutFirebaseAuth}}>
       {children}
     </AuthContext.Provider>
   );
