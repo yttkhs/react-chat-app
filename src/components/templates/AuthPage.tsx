@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom'
 import {AuthContext} from '../../providers/Auth';
 import {userDataAction} from '../../store/actions/userDataAction';
 import Loading from "../organisms/Loading";
+import AuthPageComponent from "./AuthPageComponent";
 
 type Props = {
   children: any
@@ -52,7 +53,11 @@ const AuthPage: React.FC<Props> = ({children}) => {
   // Display home screen if user is logged in
   // Redirect to login screen if user is logged out
   return userState
-    ? children
+    ? (
+      <AuthPageComponent>
+        {children}
+      </AuthPageComponent>
+    )
     : <Redirect to="/login" />;
 };
 
