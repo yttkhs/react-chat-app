@@ -16,9 +16,9 @@ export const typography = (baseSize: number = 12) => {
 
   const headingSizeOptions = Object.assign({}, ...headingsSize)
 
-  return <TypographyOptions>{
+  return {
     fontFamily: "",
     fontSize: baseSize,
     ...headingSizeOptions
-  }
+  } as TypographyOptions
 }
