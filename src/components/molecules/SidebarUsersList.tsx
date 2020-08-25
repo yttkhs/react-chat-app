@@ -30,17 +30,15 @@ const SidebarUsersList: React.FC<Props> = ({hits}) => {
             <Avatar>H</Avatar>
           </ListItemAvatar>
           <ListItemText primary={value.displayName} secondary={value.biography} />
-          <ListItemSecondaryAction>
-            {
-              friendIdList.includes(value.userId)
-                ? (
-                  <IconButton edge="end" disabled>
-                    <CheckCircle />
-                  </IconButton>
-                )
-                : <ButtonFriendRegister hits={value} />
-            }
-          </ListItemSecondaryAction>
+          <ListItemSecondaryAction>{
+            friendIdList.includes(value.userId)
+              ? (
+                <IconButton edge="end" disabled>
+                  <CheckCircle />
+                </IconButton>
+              )
+              : <ButtonFriendRegister hits={value} />
+          }</ListItemSecondaryAction>
         </ListItem>
       ))}
     </SidebarListContainer>
