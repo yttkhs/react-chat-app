@@ -20,7 +20,6 @@ const SidebarFriendPanel: React.FC<SidebarPanelComponent> = ({value, index}) => 
   }
 
   useEffect(() => {
-
     // Raw friend data
     const originalData = createFriendDataList(userData.friend)
 

@@ -1,11 +1,13 @@
 import React from 'react';
 import firebase from '../../lib/firebase'
 import {useDispatch, useSelector} from "react-redux";
-import {RootState, UserDataProperties} from '../../types';
 import {userDataAction} from "../../store/actions/userDataAction";
 import {UserData} from "../../classes/UserData";
 import {ChatData} from "../../classes/ChatData";
 import {Hit} from "react-instantsearch-core";
+import {IconButton} from "@material-ui/core";
+import {AddCircle} from "@material-ui/icons";
+import {RootState, UserDataProperties} from '../../types';
 
 type Props = {
   hits: Hit
@@ -60,7 +62,11 @@ const ButtonFriendRegister: React.FC<Props> = ({hits}) => {
   }
 
   return (
-    <button type="button" onClick={handleClick}>友達追加</button>
+    <div onClick={handleClick}>
+      <IconButton edge="end" aria-label="Friend Registration">
+        <AddCircle />
+      </IconButton>
+    </div>
   );
 };
 
