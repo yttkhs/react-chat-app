@@ -12,7 +12,7 @@ import {
 
 const SidebarFriendPanel: React.FC<SidebarPanelComponent> = ({value, index}) => {
   const userData = useSelector<RootState, UserDataProperties>(({userData}) => userData)
-  const friendDataList = createFriendDataList(userData.friend)
+  const friendData = createFriendDataList(userData.friend)
   const [searchWord, setSearchWord] = useState<string>("")
   const [filteredData, setFilteredData] = useState<UserDataFriendProperties[]>([])
 
@@ -21,16 +21,21 @@ const SidebarFriendPanel: React.FC<SidebarPanelComponent> = ({value, index}) => 
   }
 
   useEffect(() => {
-    setFilteredData(friendDataList.filter(value => {
-      return value.displayName.startsWith(searchWord);
-    }))
+    // Filter search word and display name by prefix match
+    const filtered = friendData.filter(value => value.displayName.startsWith(searchWord))
+
+    setFilteredData(filtered)
   }, [searchWord])
 
   return value === index
     ? (
       <>
         <SidebarFriendSearchForm changeEvent={handleChange} />
-        <SidebarFriendList data={searchWord === "" ? friendDataList : filteredData} />
+        <SidebarFriendList data={
+          searchWord === ""
+            ? friendData
+            : filteredData
+        } />
       </>
     )
     : null

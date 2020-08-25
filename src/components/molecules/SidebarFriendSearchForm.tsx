@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     searchField: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1)
-    },
+    }
   })
 )
 
@@ -24,7 +24,7 @@ const SidebarFriendSearchForm: React.FC<Props> = ({changeEvent}) => {
 
   return (
     <form
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={(event) => event.preventDefault()}
       className={classes.searchForm}
       autoComplete="off"
       noValidate
