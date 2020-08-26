@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const SidebarFriendSearchForm: React.FC<Props> = ({changeEvent}) => {
+const SidebarSearchForm: React.FC<Props> = ({changeEvent}) => {
   const classes = useStyles()
 
   return (
@@ -43,4 +43,4 @@ const SidebarFriendSearchForm: React.FC<Props> = ({changeEvent}) => {
   );
 };
 
-export default SidebarFriendSearchForm;
+export default SidebarSearchForm;

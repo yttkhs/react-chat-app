@@ -1,19 +1,32 @@
 import React from 'react';
 import {Avatar, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
 import SidebarListContainer from "./SidebarListContainer";
+import {UserDataFriendProperties} from "../../types";
 
-const SidebarTalkList: React.FC= () => {
+type Props = {
+  data: UserDataFriendProperties[]
+}
 
+const SidebarTalkList: React.FC<Props> = ({data}) => {
   return (
     <SidebarListContainer>
-      <ListItem alignItems="flex-start" button>
-        <ListItemAvatar>
-          <Avatar>H</Avatar>
-        </ListItemAvatar>
-        <ListItemText primary={'Friend Name'} secondary={'ChatText ChatText ChatText ChatText'} />
-      </ListItem>
+      {data.map((value, index) => (
+        <ListItem
+          alignItems={value?.lastChatLog ? "flex-start" : "center"}
+          key={index}
+          button
+        >
+          <ListItemAvatar>
+            <Avatar>H</Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={value.displayName}
+            secondary={value?.lastChatLog && value.lastChatLog.text}
+          />
+        </ListItem>
+      ))}
     </SidebarListContainer>
-  );
+  )
 };
 
 export default SidebarTalkList;
