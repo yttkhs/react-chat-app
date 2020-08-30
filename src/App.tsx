@@ -17,6 +17,7 @@ import SignUp from "./components/pages/SignUp";
 import Home from "./components/pages/Home";
 import Profile from "./components/pages/Profile";
 import ProfileEdit from './components/pages/ProfileEdit';
+import Chat from "./components/pages/Chat";
 
 const App: React.FC = () => (
   <MuiThemeProvider theme={theme}>
@@ -31,7 +32,8 @@ const App: React.FC = () => (
             <AuthPage>
               <Switch>
                 <Route exact path="/home" component={Home} />
-                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/chat/:roomId" component={Chat} />
+                <Route exact path="/profile/:userId" component={Profile} />
                 <Route exact path="/profile/edit" component={ProfileEdit} />
               </Switch>
             </AuthPage>
