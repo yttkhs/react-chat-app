@@ -31,7 +31,7 @@ const SidebarSearchForm: React.FC<Props> = ({changeEvent}) => {
     >
       <TextField
         className={classes.searchField}
-        placeholder="Search Name"
+        placeholder="SEARCH NAME"
         margin="dense"
         variant="outlined"
         fullWidth

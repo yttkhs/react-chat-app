@@ -30,7 +30,7 @@ const SidebarUsersSearchForm: React.FC<SearchBoxProvided> = ({currentRefinement,
     >
       <TextField
         className={classes.searchField}
-        placeholder="Search Name"
+        placeholder="SEARCH NAME"
         margin="dense"
         variant="outlined"
         fullWidth
