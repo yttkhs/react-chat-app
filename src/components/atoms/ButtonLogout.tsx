@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import firebase from "../../lib/firebase";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {AuthContext} from "../../providers/Auth";
-import Button from '@material-ui/core/Button';
+import {MenuItem} from "@material-ui/core";
 
 type Props = {
   history: RouteComponentProps["history"]
@@ -22,7 +22,7 @@ const ButtonLogout: React.FC<Props> = ({history}) => {
   }
 
   return (
-    <Button variant="contained" color="primary" onClick={handleLogout}>LOGOUT</Button>
+    <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
   );
 };
 
