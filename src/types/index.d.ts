@@ -3,8 +3,8 @@ export interface _UserData {
 }
 
 export interface UserDataProperties {
-  userId: string,
-  displayName: string,
+  userId: string
+  displayName: string
   email: string
   biography: string
   friend: UserDataFriend
@@ -15,9 +15,31 @@ export interface UserDataFriend {
 }
 
 export interface UserDataFriendProperties {
-  roomId: string,
-  displayName: string,
+  roomId: string
+  userId: string
+  displayName: string
   biography: string
+  lastChatLog?: ChatDataLogProperties
+}
+
+export interface ChatDataProperties {
+  authors: ChatDataAuthorsProperties
+  log?: ChatDataLog
+}
+
+export interface ChatDataAuthorsProperties {
+  firstAuthor: string,
+  secondAuthor: string
+}
+
+export interface ChatDataLog {
+  [key: string]: ChatDataLogProperties
+}
+
+export interface ChatDataLogProperties {
+  timestamp: number
+  text: string
+  author: string
 }
 
 export interface RootState {
