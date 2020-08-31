@@ -19,6 +19,7 @@
 .env.production.local
 .env
 .idea
+.firebase
 
 firebase-debug.log*
 npm-debug.log*
