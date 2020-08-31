@@ -1,13 +1,13 @@
-## REACT CHAT APP
+# REACT CHAT APP
 
-🚧WIP  
-🌐[REACT CHAT APP](https://react-chat-app-4204e.web.app/)
+🚧 WIP  
+🌐 [REACT CHAT APP](https://react-chat-app-4204e.web.app/)
 
-### Features
-Chat app with user authentication
-Application for practice
+## Features
+- Chat app with user authentication
+- Application for practice
 
-### Stacks
+## Stacks
 - React.js
   - React Router
 - Firebase
