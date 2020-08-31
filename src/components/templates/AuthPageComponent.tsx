@@ -1,21 +1,20 @@
 import React from 'react';
 import TheHeader from "../organisms/TheHeader";
 import TheSidebar from "../organisms/TheSidebar";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import {createStyles, makeStyles} from "@material-ui/core/styles";
 
 type Props = {
   children: any
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
       flexWrap: "wrap"
     },
     content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
+      flexGrow: 1
     },
   })
 )
