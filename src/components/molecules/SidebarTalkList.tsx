@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import {Avatar, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
 import SidebarListContainer from "./SidebarListContainer";
 import {UserDataFriendProperties} from "../../types";
@@ -12,7 +13,9 @@ const SidebarTalkList: React.FC<Props> = ({data}) => {
     <SidebarListContainer>
       {data.map((value, index) => (
         <ListItem
-          alignItems={value?.lastChatLog ? "flex-start" : "center"}
+          component={Link}
+          to={'/chat/' + value.roomId}
+          alignItems={value.lastChatLog?.text ? "flex-start" : "center"}
           key={index}
           button
         >
@@ -21,7 +24,7 @@ const SidebarTalkList: React.FC<Props> = ({data}) => {
           </ListItemAvatar>
           <ListItemText
             primary={value.displayName}
-            secondary={value?.lastChatLog && value.lastChatLog.text}
+            secondary={value.lastChatLog?.text && value.lastChatLog.text}
           />
         </ListItem>
       ))}
