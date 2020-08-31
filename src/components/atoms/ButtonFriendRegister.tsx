@@ -25,8 +25,9 @@ const ButtonFriendRegister: React.FC<Props> = ({hits}) => {
     friend: {
       [data.userId]: {
         roomId: uid,
+        userId: data.userId,
         displayName: data.displayName,
-        biography: data.biography
+        biography: data.biography,
       }
     }
   })
@@ -39,7 +40,7 @@ const ButtonFriendRegister: React.FC<Props> = ({hits}) => {
     const newFriendData = createFriendDataObject(uid, {
       userId: hits.userId,
       displayName: hits.displayName,
-      biography: hits.biography
+      biography: hits.biography,
     })
 
     const selfFriendData = createFriendDataObject(uid, {
@@ -51,14 +52,14 @@ const ButtonFriendRegister: React.FC<Props> = ({hits}) => {
     // Store data in Redux
     dispatch(userDataAction.add(newFriendData))
 
-    // Store your user data in the friend list data
+    // Store your user data in the friend list da ta
     new UserData(userData.userId).updateUserData(newFriendData)
 
     // Add friend list data to friend's user data
     new UserData(hits.userId).updateUserData(selfFriendData)
 
     // Create a chat room
-    new ChatData(uid).createChatData()
+    new ChatData(uid).createChatData(userData.userId, hits.userId)
   }
 
   return (
