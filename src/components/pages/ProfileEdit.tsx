@@ -5,14 +5,34 @@ import {useForm} from "react-hook-form";
 import {UserData} from "../../classes/UserData";
 import {Link} from "react-router-dom";
 import createFriendIdList from "../../modules/createFriendIdList";
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import {Paper, Table, TableBody, TableContainer, TableRow, TableCell, Button} from "@material-ui/core";
 
 type Inputs = {
   displayName: string;
   biography: string;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: theme.spacing(3)
+    },
+    paper: {
+      marginBottom: theme.spacing(3)
+    },
+    buttonGroup: {
+      display: "flex"
+    },
+    editButton: {
+      marginLeft: theme.spacing(2)
+    }
+  })
+)
+
 const ProfileEdit: React.FC = () => {
   const userData = useSelector<RootState, UserDataProperties>(({userData}) => userData)
+  const classes = useStyles()
 
   // Create a friend ID list
   const friendIdList = createFriendIdList(userData.friend)
@@ -57,30 +77,50 @@ const ProfileEdit: React.FC = () => {
   })
 
   return (
-    <div>
+    <div className={classes.root}>
       <form onSubmit={handleEditProfileSubmit}>
-        <label>
-          <span>名前</span>
-          <input
-            type="text"
-            name="displayName"
-            defaultValue={userData.displayName}
-            ref={displayNameRegister}
-          />
-          {errors.displayName && <p>{errors.displayName?.message}</p>}
-        </label>
-        <label>
-          <span>紹介文</span>
-          <textarea
-            name="biography"
-            defaultValue={userData.biography}
-            ref={biographyRegister}
-          />
-        </label>
-        {errors.biography && <p>{errors.biography?.message}</p>}
-        <button type="submit">EDIT</button>
+        <Paper className={classes.paper}>
+          <TableContainer>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <label htmlFor="name">USER NAME</label>
+                  </TableCell>
+                  <TableCell>
+                    <input
+                      id="name"
+                      type="text"
+                      name="displayName"
+                      defaultValue={userData.displayName}
+                      ref={displayNameRegister}
+                    />
+                    {errors.displayName && <p>{errors.displayName?.message}</p>}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <label htmlFor="biography">BIOGRAPHY</label>
+                  </TableCell>
+                  <TableCell>
+                    <textarea
+                      id="biography"
+                      name="biography"
+                      defaultValue={userData.biography}
+                      ref={biographyRegister}
+                    />
+                    {errors.biography && <p>{errors.biography?.message}</p>}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+        <div className={classes.buttonGroup}>
+          <Button component={Link} to={"/profile/" + userData.userId} variant="contained">Back Profile</Button>
+          <Button className={classes.editButton} variant="contained" color="primary" type="submit">EDIT</Button>
+        </div>
       </form>
-      <Link to="/profile">Back Profile</Link>
     </div>
   );
 };

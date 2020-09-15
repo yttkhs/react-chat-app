@@ -1,14 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import {useSelector} from "react-redux";
-import { RootState, UserDataProperties } from '../../types';
+import {RootState, UserDataProperties} from '../../types';
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import {Table, TableContainer, TableRow, TableCell, TableBody, Paper, Button} from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(1, 0)
+      padding: theme.spacing(3)
+    },
+    paper: {
+      width: '100%',
+      marginBottom: theme.spacing(2),
     },
   })
 )
@@ -19,21 +23,38 @@ const Profile: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      <List disablePadding>
-        <ListItem dense>
-          <ListItemText primary="USER ID" secondary={userData.userId} />
-        </ListItem>
-        <ListItem dense>
-          <ListItemText primary="USER NAME" secondary={userData.displayName} />
-        </ListItem>
-        <ListItem dense>
-          <ListItemText primary="EMAIL" secondary={userData.email} />
-        </ListItem>
-        <ListItem dense>
-          <ListItemText primary="BIOGRAPHY" secondary={userData.biography} />
-        </ListItem>
-      </List>
-      <Link to="/profile/edit">Edit Profile</Link>
+      <Paper className={classes.paper}>
+        <TableContainer>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell>USER ID</TableCell>
+                <TableCell>{userData.userId}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>USER NAME</TableCell>
+                <TableCell>{userData.displayName}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>EMAIL</TableCell>
+                <TableCell>{userData.email}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>BIOGRAPHY</TableCell>
+                <TableCell>{userData.biography}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+      <Button
+        component={Link}
+        to="/profile/edit"
+        color="primary"
+        variant="contained"
+      >
+        Edit Profile
+      </Button>
     </div>
   );
 };

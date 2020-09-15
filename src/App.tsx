@@ -32,9 +32,9 @@ const App: React.FC = () => (
             <AuthPage>
               <Switch>
                 <Route exact path="/home" component={Home} />
+                <Route exact path="/profile/edit" component={ProfileEdit} />
                 <Route path="/chat/:roomId" component={Chat} />
                 <Route path="/profile/:userId" component={Profile} />
-                <Route exact path="/profile/edit" component={ProfileEdit} />
               </Switch>
             </AuthPage>
           </Switch>
