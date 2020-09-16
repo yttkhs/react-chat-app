@@ -48,7 +48,7 @@ const SignUp: React.FC<Props> = ({history}) => {
           throw new Error("Failed to get user data.")
         }
       })
-      .catch((error) => alert(error))
+      .catch(({message}) => alert(message))
   }
 
   return (

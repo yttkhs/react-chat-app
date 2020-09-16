@@ -16,26 +16,22 @@ const index = client.initIndex('users')
 
 // Save data to algolia when it is registered in users collection of firestore
 exports.onUsersDataCreated = functions.firestore.document('users/{userId}')
-  .onCreate((snap, context) => {
-    const users = snap.data()
+.onCreate((snap, context) => {
+  const users = snap.data()
 
-    // Add required parameters to Aligolia objects
-    users.objectID = context.params.userId
+  // Add required parameters to Aligolia objects
+  users.objectID = context.params.userId
 
-    return users
-      ? index.saveObject(users)
-      : null
-  })
+  return index.saveObject(users)
+})
 
 // Update Algolia data after updating Firestore user data
 exports.onUsersDataUpdated = functions.firestore.document('users/{userId}')
-  .onUpdate((change, context) => {
-    const users = change.after.data()
+.onUpdate((change, context) => {
+  const users = change.after.data()
 
-    // Add required parameters to Aligolia objects
-    users.objectID = context.params.userId
+  // Add required parameters to Aligolia objects
+  users.objectID = context.params.userId
 
-    return users
-      ? index.partialUpdateObject(users)
-      : null
-  })
+  return index.partialUpdateObject(users)
+})
