@@ -1,7 +1,7 @@
 import algoliasearch, {SearchClient} from 'algoliasearch'
 
-const appId = `${process.env.REACT_APP_ALGOLIA_APP_ID}`
-const apiKey = `${process.env.REACT_APP_ALGOLIA_SEARCH_ONLY}`
+const appId = `${process.env.react_app_algolia_app_id}`
+const apiKey = `${process.env.react_app_algolia_search_only}`
 
 export const algoliaClient = algoliasearch(appId, apiKey);
 

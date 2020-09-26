@@ -1,19 +1,21 @@
-import * as firebase from 'firebase/app'
-import "firebase/firestore";
-import'firebase/database'
-import "firebase/auth";
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/database';
+import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID
+  apiKey: process.env.react_app_api_key,
+  authDomain: process.env.react_app_auth_domain,
+  databaseURL: process.env.react_app_database_url,
+  projectId: process.env.react_app_project_id,
+  storageBucket: process.env.react_app_storage_bucket,
+  messagingSenderId: process.env.react_app_messaging_sender_id,
+  appId: process.env.react_app_app_id,
+  measurementId: process.env.react_app_measurement_id,
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default firebase;

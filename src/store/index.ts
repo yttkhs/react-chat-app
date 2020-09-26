@@ -1,14 +1,6 @@
-import {createStore, combineReducers, compose} from "redux";
-import {userDataReducer as userData} from './reducers/userDataReducer'
+import { atom } from 'recoil';
 
-const reducers = combineReducers({
-  userData
-})
-
-export const store = createStore(
-  reducers,
-  compose(
-    // @ts-ignore
-    process.env.NODE_ENV === 'development' && window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
-)
+export const toggleMenuState = atom<boolean>({
+  key: 'toggleMenuState',
+  default: false,
+});

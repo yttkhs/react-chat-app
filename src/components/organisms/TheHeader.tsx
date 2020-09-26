@@ -1,29 +1,19 @@
 import React from 'react';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import {AppBar, Toolbar, Typography} from "@material-ui/core";
-import HeaderMenu from "../molecules/HeaderMenu";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-    },
-    title: {
-      flexGrow: 1
-    }
-  })
-)
+import HeaderNavigation from '../molecules/HeaderNavigation';
+import useAuth from '../../hooks/useAuth';
+import HeaderLogo from '../atoms/HeaderLogo';
+import ButtonSignIn from '../atoms/ButtonSignIn';
 
 const TheHeader: React.FC = () => {
-  const classes = useStyles()
+  const auth = useAuth();
 
   return (
-    <AppBar position="static" className={classes.appBar} aria-label="Global Header">
-      <Toolbar>
-        <Typography className={classes.title} variant="h4">REACT CHAT APP</Typography>
-        <HeaderMenu />
-      </Toolbar>
-    </AppBar>
+    <header className="bg-white border-b">
+      <div className="h-16 flex items-center justify-between px-6">
+        <HeaderLogo />
+        {auth ? <HeaderNavigation /> : <ButtonSignIn />}
+      </div>
+    </header>
   );
 };
 
