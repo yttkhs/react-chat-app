@@ -1,11 +1,9 @@
 import React from 'react';
-import Link from "next/link";
+import ButtonLogin from '../components/atoms/ButtonLogin';
 
 const Home = () => (
   <div>
-    <Link href="/">
-      <a>LOGIN PAGE</a>
-    </Link>
+    <ButtonLogin />
   </div>
 );
 

@@ -3,7 +3,7 @@
     @typescript-eslint/explicit-function-return-type
 */
 
-const {resolve} = require('path');
+const { resolve } = require('path');
 
 const nextConfig = {
   webpack: (config) => {
@@ -22,7 +22,7 @@ const nextConfig = {
     react_app_measurement_id: process.env.REACT_APP_MEASUREMENT_ID,
     react_app_algolia_app_id: process.env.REACT_APP_ALGOLIA_APP_ID,
     react_app_algolia_admin_key: process.env.REACT_APP_ALGOLIA_ADMIN_KEY,
-    react_app_algolia_search_only: process.env.REACT_APP_ALGOLIA_SEARCH_ONLY
+    react_app_algolia_search_only: process.env.REACT_APP_ALGOLIA_SEARCH_ONLY,
   },
 };
 

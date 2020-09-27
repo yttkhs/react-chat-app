@@ -1,32 +1,39 @@
-import firebase from '../lib/firebase'
-import {ChatDataAuthorsProperties, ChatDataLog, ChatDataProperties} from '../types'
+import firebase from '../lib/firebase';
+import {
+  ChatDataAuthorsProperties,
+  ChatDataLog,
+  ChatDataProperties,
+} from '../types';
 
 export class ChatData {
-  constructor(readonly roomId: string) {
-  }
+  constructor(readonly roomId: string) {}
 
   createChatData(firstAuthor: string, secondAuthor: string) {
     const authorsData: ChatDataAuthorsProperties = {
       firstAuthor: firstAuthor,
-      secondAuthor: secondAuthor
-    }
+      secondAuthor: secondAuthor,
+    };
 
-    firebase.database()
+    firebase
+      .database()
       .ref('chat/' + this.roomId + '/authors/')
       .set(authorsData)
-      .catch(e => console.log(e))
+      .catch((e) => console.log(e));
   }
 
   fetchLastChatLog() {
-    return firebase.database()
+    return firebase
+      .database()
       .ref('chat/' + this.roomId)
       .once('value')
       .then((snapshot) => {
-        const value: ChatDataProperties | undefined = snapshot.val()
+        const value: ChatDataProperties | undefined = snapshot.val();
         return value?.log
-          ? Object.entries(value.log).map(value => value[1]).slice(-1)[0]
+          ? Object.entries(value.log)
+              .map((value) => value[1])
+              .slice(-1)[0]
           : undefined;
-      })
+      });
   }
 
   addChatLog(text: string, author: string) {
@@ -36,13 +43,14 @@ export class ChatData {
       [randomKey]: {
         timestamp: Date.now(),
         text: text,
-        author: author
-      }
-    }
+        author: author,
+      },
+    };
 
-    firebase.database()
+    firebase
+      .database()
       .ref('chat/' + this.roomId + '/log/')
       .update(logData)
-      .catch(e => console.log(e))
+      .catch((e) => console.log(e));
   }
 }
